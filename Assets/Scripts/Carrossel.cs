@@ -22,7 +22,7 @@ public class Carrossel
     // Update is called once per frame
     void Update()
     {
-        float deslocamento = Mathf.Repeat(this.velocidade.valor * Time.time, tamanhoRealDaImagem);
+        float deslocamento = Mathf.Repeat(this.velocidade.valor * Time.time, tamanhoRealDaImagem / 2);
         this.transform.position = this. posicaoInicial + (Vector3.left * deslocamento);
     }
 }

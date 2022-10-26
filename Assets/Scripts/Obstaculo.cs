@@ -8,36 +8,24 @@ public class Obstaculo : MonoBehaviour
     private VariavelCompartilhadaFloat velocidade;
     [SerializeField]
     private float variacaoDaPosicaoY;
-    private Vector3 posicaoDoAviao;
-    private Pontuacao pontuacao;
-    private bool pontuei;
 
     private void Awake()
     {
         this.transform.Translate(Vector3.up * Random.Range(-variacaoDaPosicaoY, variacaoDaPosicaoY));
     }
 
-    private void Start()
-    {
-        this.posicaoDoAviao = GameObject.FindObjectOfType<Aviao>().transform.position;
-        this.pontuacao = GameObject.FindObjectOfType<Pontuacao>();
-    }
-
     // Update is called once per frame
     private void Update()
     {
         this.transform.Translate(Vector3.left * this.velocidade.valor * Time.deltaTime);
-
-        if (!this.pontuei && this.transform.position.x < posicaoDoAviao.x)
-        {
-            this.pontuei = true;
-            this.pontuacao.AdicionarPontos();
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D outro)
     {
-        this.Destruir();
+        if (outro.CompareTag("parede"))
+        {
+            this.Destruir();
+        }
     }
 
     public void Destruir()
